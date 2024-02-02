@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PowPowTanks</title>
+		<link rel="stylesheet" type="text/css" href="static/styles.css">
+		<link rel="shortcut icon" type="image/png" href="favicon_16x16.png"/>
+    	<script src="/socket.io/socket.io.js"></script>
+	</head>
+	<body onunload="leaveRoom()">
+		<div id="cover"></div>
+
+		<img id="tankImage1" src="static/images/tank1.png" hidden>
+		<img id="tankImage2" src="static/images/tank2.png" hidden>
+		<img id="tankImage3" src="static/images/tank3.png" hidden>
+		<img id="tankImage4" src="static/images/tank4.png" hidden>
+		<img id="tank_downImage" src="static/images/tank_down.png" hidden>
+
+		<div class="header">
+			<span id="idSpan" onclick="copyRoomId()">###</span>
+			<input type="text" id="hiddenIdText" hidden>
+			<h1 id="title">PowPowTanks</h1>
+		</div>
+
+		<div id="setupDiv">
+			SETUP
+			<hr><br>
+			<input type="text" class="textField" id="nicknameField" maxlength="10" placeholder="Your Name / Tag"><br>
+			<div id="levelDiv">
+				<img src="static/images/levels/flat.png" class="levelImg" id="level0" onclick="levelSelect(0)" width="100" height="60">
+				<img src="static/images/levels/sin.png" class="levelImg" id="level1" onclick="levelSelect(1)" width="100" height="60">
+				<img src="static/images/levels/castle.png" class="levelImg" id="level2" onclick="levelSelect(2)" width="100" height="60">
+				<img src="static/images/levels/valley.png" class="levelImg" id="level3" onclick="levelSelect(3)" width="100" height="60">
+				<img src="static/images/levels/slope1.png" class="levelImg" id="level4" onclick="levelSelect(4)" width="100" height="60">
+				<img src="static/images/levels/slope2.png" class="levelImg" id="level5" onclick="levelSelect(5)" width="100" height="60">
+				<img src="static/images/levels/hill.png" class="levelImg" id="level6" onclick="levelSelect(6)" width="100" height="60">
+				<img src="static/images/levels/bump.png" class="levelImg" id="level7" onclick="levelSelect(7)" width="100" height="60">
+				<img src="static/images/levels/random.png" class="levelImg activeLevel" id="level8" onclick="levelSelect(8)" width="100" height="60">
+			</div>
+			<br>
+			<input type="button" id="newRoomButton" class="orangeButton" value="Create Room" onclick="createNewRoom()"><br>
+			<br>
+			<input type="text" class="textField" id="joinId" placeholder="Room ID">
+			<input type="button" id="joinButton" class="orangeButton" value="Join" onclick="joinGame()">
+		</div>
+
+		<div id="changeMapDiv" hidden>
+			CHANGE MAP<span id="closeMapDiv" onclick="closeMapDiv()">X</span>
+			<hr>
+			<div id="levelDiv">
+				<img src="static/images/levels/flat.png" class="levelImg" id="updateLevel0" onclick="levelUpdate(0)" width="100" height="60">
+				<img src="static/images/levels/sin.png" class="levelImg" id="updateLevel1" onclick="levelUpdate(1)" width="100" height="60">
+				<img src="static/images/levels/castle.png" class="levelImg" id="updateLevel2" onclick="levelUpdate(2)" width="100" height="60">
+				<img src="static/images/levels/valley.png" class="levelImg" id="updateLevel3" onclick="levelUpdate(3)" width="100" height="60">
+				<img src="static/images/levels/slope1.png" class="levelImg" id="updateLevel4" onclick="levelUpdate(4)" width="100" height="60">
+				<img src="static/images/levels/slope2.png" class="levelImg" id="updateLevel5" onclick="levelUpdate(5)" width="100" height="60">
+				<img src="static/images/levels/hill.png" class="levelImg" id="updateLevel6" onclick="levelUpdate(6)" width="100" height="60">
+				<img src="static/images/levels/bump.png" class="levelImg" id="updateLevel7" onclick="levelUpdate(7)" width="100" height="60">
+				<img src="static/images/levels/random.png" class="levelImg activeLevel" id="updateLevel8" onclick="levelUpdate(8)" width="100" height="60">
+			</div>
+		</div>
+
+		<div id="mainDiv">
+			<div id="canvasDiv">
+				<canvas id="Canvas" width="800" height="500"></canvas><br>
+			</div>
+			<div id="chatDiv">
+				<input type="button" id="changeMap" class="orangeButton" value="Map" onclick="changeMap()">
+				<table id="chatTable">
+					<tr>
+						<td id=chatTextTable></td>
+					</tr>
+				</table>
+			</div>
+			<input type="text" id="chatInputField" placeholder="Type here...">
+			<input type="button" class="sendButton" id="chatSendButton" value="Send" onclick="sendMessage()">
+		</div>
+
+		<div class="dividerDiv"><span id="copyright">&copy; Marc Zuber - 2021</span></div>
+
+		<span id="debugOutput"></span>
+
+		<script src="static/script.js"></script>
+	</body>
+</html>
